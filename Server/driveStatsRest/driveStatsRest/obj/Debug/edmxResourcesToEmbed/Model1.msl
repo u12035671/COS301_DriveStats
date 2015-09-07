@@ -4,12 +4,12 @@
     <EntitySetMapping Name="tripDatas">
       <EntityTypeMapping TypeName="drivestatsModel.tripData">
         <MappingFragment StoreEntitySet="tripData">
+          <ScalarProperty Name="score" ColumnName="score" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="tripID" ColumnName="tripID" />
           <ScalarProperty Name="latitude" ColumnName="latitude" />
           <ScalarProperty Name="longitude" ColumnName="longitude" />
           <ScalarProperty Name="speed" ColumnName="speed" />
-          <ScalarProperty Name="recTime" ColumnName="recTime" />
           <ScalarProperty Name="maxXAcelerometer" ColumnName="maxXAcelerometer" />
           <ScalarProperty Name="maxYAcelerometer" ColumnName="maxYAcelerometer" />
           <ScalarProperty Name="maxZAcelerometer" ColumnName="maxZAcelerometer" />
@@ -19,11 +19,10 @@
     <EntitySetMapping Name="trips">
       <EntityTypeMapping TypeName="drivestatsModel.trip">
         <MappingFragment StoreEntitySet="trips">
+          <ScalarProperty Name="startTime" ColumnName="startTime" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="userID" ColumnName="userID" />
           <ScalarProperty Name="tripDate" ColumnName="tripDate" />
-          <ScalarProperty Name="startLatitude" ColumnName="startLatitude" />
-          <ScalarProperty Name="startLongitude" ColumnName="startLongitude" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

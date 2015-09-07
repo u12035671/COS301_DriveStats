@@ -14,20 +14,11 @@ namespace driveStatsRest
     
     public partial class trip
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public trip()
-        {
-            this.tripDatas = new HashSet<tripData>();
-        }
-    
         public int ID { get; set; }
         public Nullable<int> userID { get; set; }
         public string tripDate { get; set; }
-        public string startLatitude { get; set; }
-        public string startLongitude { get; set; }
+        public string startTime { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tripData> tripDatas { get; set; }
         public virtual user user { get; set; }
     }
 }

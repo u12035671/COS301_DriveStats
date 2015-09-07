@@ -19,11 +19,9 @@ namespace driveStatsRest
         public string latitude { get; set; }
         public string longitude { get; set; }
         public Nullable<double> speed { get; set; }
-        public string recTime { get; set; }
         public Nullable<double> maxXAcelerometer { get; set; }
         public Nullable<double> maxYAcelerometer { get; set; }
         public Nullable<double> maxZAcelerometer { get; set; }
-    
-        public virtual trip trip { get; set; }
+        public Nullable<double> score { get; set; }
     }
 }
