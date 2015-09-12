@@ -26,6 +26,21 @@ namespace driveStatsRest
         [OperationContract]
         [WebInvoke(Method = "POST", UriTemplate = "UploadFile/{fileName}")]
         string UploadFile(string fileName, Stream fileStream);
-        
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+            ResponseFormat = WebMessageFormat.Json,
+            RequestFormat = WebMessageFormat.Json,
+            BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "addtrip/")]
+        string addTrip(string userID, string tripDate, string startTime,string data);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST",
+            ResponseFormat = WebMessageFormat.Json,
+            
+            BodyStyle = WebMessageBodyStyle.Wrapped,
+            UriTemplate = "test/")]
+        string test(string thing);
     }
 }

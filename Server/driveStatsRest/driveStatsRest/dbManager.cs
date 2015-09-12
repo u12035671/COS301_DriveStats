@@ -50,13 +50,16 @@ namespace driveStatsRest
             }
             return id;
         }
-        public void addUserTrip(trip ut)
+        public int addUserTrip(trip ut)
         {
+            int id = -1;
             using (var context = new drivestatsEntities())
             {
                 context.trips.Add(ut);
                 context.SaveChanges();
+                id = ut.ID;
             }
+            return id;
         }
         public trip getUserTrip(int id)
         {

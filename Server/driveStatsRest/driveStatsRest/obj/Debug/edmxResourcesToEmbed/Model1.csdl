@@ -6,14 +6,12 @@
     </Key>
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="tripID" Type="Int32" />
-    <Property Name="latitude" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="longitude" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="speed" Type="Double" />
-    <Property Name="recTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-    <Property Name="maxXAcelerometer" Type="Double" />
-    <Property Name="maxYAcelerometer" Type="Double" />
-    <Property Name="maxZAcelerometer" Type="Double" />
-    <NavigationProperty Name="trip" Relationship="Self.FK__tripData__tripID__3B75D760" FromRole="tripData" ToRole="trips" />
+    <Property Name="latitude" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="longitude" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="speed" Type="String" />
+    <Property Name="maxXAcelerometer" Type="String" />
+    <Property Name="maxYAcelerometer" Type="String" />
+    <Property Name="maxZAcelerometer" Type="String" />
   </EntityType>
   <EntityType Name="trip">
     <Key>
@@ -22,10 +20,9 @@
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="userID" Type="Int32" />
     <Property Name="tripDate" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-    <Property Name="startLatitude" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-    <Property Name="startLongitude" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="tripDatas" Relationship="Self.FK__tripData__tripID__3B75D760" FromRole="trips" ToRole="tripData" />
     <NavigationProperty Name="user" Relationship="Self.FK__trips__userID__38996AB5" FromRole="trips" ToRole="users" />
+    <Property Name="startTime" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+    <Property Name="score" Type="Double" />
   </EntityType>
   <EntityType Name="user">
     <Key>
@@ -37,18 +34,6 @@
     <Property Name="averageScore" Type="Double" />
     <NavigationProperty Name="trips" Relationship="Self.FK__trips__userID__38996AB5" FromRole="users" ToRole="trips" />
   </EntityType>
-  <Association Name="FK__tripData__tripID__3B75D760">
-    <End Role="trips" Type="Self.trip" Multiplicity="0..1" />
-    <End Role="tripData" Type="Self.tripData" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="trips">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="tripData">
-        <PropertyRef Name="tripID" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__trips__userID__38996AB5">
     <End Role="users" Type="Self.user" Multiplicity="0..1" />
     <End Role="trips" Type="Self.trip" Multiplicity="*" />
@@ -65,10 +50,6 @@
     <EntitySet Name="tripDatas" EntityType="Self.tripData" />
     <EntitySet Name="trips" EntityType="Self.trip" />
     <EntitySet Name="users" EntityType="Self.user" />
-    <AssociationSet Name="FK__tripData__tripID__3B75D760" Association="Self.FK__tripData__tripID__3B75D760">
-      <End Role="trips" EntitySet="trips" />
-      <End Role="tripData" EntitySet="tripDatas" />
-    </AssociationSet>
     <AssociationSet Name="FK__trips__userID__38996AB5" Association="Self.FK__trips__userID__38996AB5">
       <End Role="users" EntitySet="users" />
       <End Role="trips" EntitySet="trips" />

@@ -4,20 +4,19 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="drivestatsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="drivestatsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="tripData">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="tripID" Type="int" />
-          <Property Name="latitude" Type="varchar" MaxLength="12" />
-          <Property Name="longitude" Type="varchar" MaxLength="12" />
-          <Property Name="speed" Type="float" />
-          <Property Name="recTime" Type="varchar" MaxLength="5" />
-          <Property Name="maxXAcelerometer" Type="float" />
-          <Property Name="maxYAcelerometer" Type="float" />
-          <Property Name="maxZAcelerometer" Type="float" />
+          <Property Name="latitude" Type="varchar" MaxLength="20" />
+          <Property Name="longitude" Type="varchar" MaxLength="20" />
+          <Property Name="speed" Type="varchar" MaxLength="4" />
+          <Property Name="maxXAcelerometer" Type="varchar" MaxLength="8" />
+          <Property Name="maxYAcelerometer" Type="varchar" MaxLength="8" />
+          <Property Name="maxZAcelerometer" Type="varchar" MaxLength="8" />
         </EntityType>
         <EntityType Name="trips">
           <Key>
@@ -26,8 +25,8 @@
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="userID" Type="int" />
           <Property Name="tripDate" Type="varchar" MaxLength="40" />
-          <Property Name="startLatitude" Type="varchar" MaxLength="12" />
-          <Property Name="startLongitude" Type="varchar" MaxLength="12" />
+          <Property Name="startTime" Type="varchar" MaxLength="6" />
+          <Property Name="score" Type="float" />
         </EntityType>
         <EntityType Name="users">
           <Key>
@@ -38,19 +37,7 @@
           <Property Name="joinDate" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="averageScore" Type="float" />
         </EntityType>
-        <Association Name="FK__tripData__tripID__3B75D760">
-          <End Role="trips" Type="Self.trips" Multiplicity="0..1" />
-          <End Role="tripData" Type="Self.tripData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trips">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tripData">
-              <PropertyRef Name="tripID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__trips__userID__38996AB5">
+        <Association Name="FK__trips__userID__5EBF139D">
           <End Role="users" Type="Self.users" Multiplicity="0..1" />
           <End Role="trips" Type="Self.trips" Multiplicity="*" />
           <ReferentialConstraint>
@@ -66,17 +53,12 @@
           <EntitySet Name="tripData" EntityType="Self.tripData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="trips" EntityType="Self.trips" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__tripData__tripID__3B75D760" Association="Self.FK__tripData__tripID__3B75D760">
-            <End Role="trips" EntitySet="trips" />
-            <End Role="tripData" EntitySet="tripData" />
-          </AssociationSet>
-          <AssociationSet Name="FK__trips__userID__38996AB5" Association="Self.FK__trips__userID__38996AB5">
+          <AssociationSet Name="FK__trips__userID__5EBF139D" Association="Self.FK__trips__userID__5EBF139D">
             <End Role="users" EntitySet="users" />
             <End Role="trips" EntitySet="trips" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="drivestatsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -86,14 +68,12 @@
           </Key>
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="tripID" Type="Int32" />
-          <Property Name="latitude" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="longitude" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="speed" Type="Double" />
-          <Property Name="recTime" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-          <Property Name="maxXAcelerometer" Type="Double" />
-          <Property Name="maxYAcelerometer" Type="Double" />
-          <Property Name="maxZAcelerometer" Type="Double" />
-          <NavigationProperty Name="trip" Relationship="Self.FK__tripData__tripID__3B75D760" FromRole="tripData" ToRole="trips" />
+          <Property Name="latitude" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="longitude" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="speed" Type="String" />
+          <Property Name="maxXAcelerometer" Type="String" />
+          <Property Name="maxYAcelerometer" Type="String" />
+          <Property Name="maxZAcelerometer" Type="String" />
         </EntityType>
         <EntityType Name="trip">
           <Key>
@@ -102,10 +82,9 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="userID" Type="Int32" />
           <Property Name="tripDate" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
-          <Property Name="startLatitude" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="startLongitude" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="tripDatas" Relationship="Self.FK__tripData__tripID__3B75D760" FromRole="trips" ToRole="tripData" />
           <NavigationProperty Name="user" Relationship="Self.FK__trips__userID__38996AB5" FromRole="trips" ToRole="users" />
+          <Property Name="startTime" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="score" Type="Double" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -117,18 +96,6 @@
           <Property Name="averageScore" Type="Double" />
           <NavigationProperty Name="trips" Relationship="Self.FK__trips__userID__38996AB5" FromRole="users" ToRole="trips" />
         </EntityType>
-        <Association Name="FK__tripData__tripID__3B75D760">
-          <End Role="trips" Type="Self.trip" Multiplicity="0..1" />
-          <End Role="tripData" Type="Self.tripData" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="trips">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="tripData">
-              <PropertyRef Name="tripID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK__trips__userID__38996AB5">
           <End Role="users" Type="Self.user" Multiplicity="0..1" />
           <End Role="trips" Type="Self.trip" Multiplicity="*" />
@@ -145,10 +112,6 @@
           <EntitySet Name="tripDatas" EntityType="Self.tripData" />
           <EntitySet Name="trips" EntityType="Self.trip" />
           <EntitySet Name="users" EntityType="Self.user" />
-          <AssociationSet Name="FK__tripData__tripID__3B75D760" Association="Self.FK__tripData__tripID__3B75D760">
-            <End Role="trips" EntitySet="trips" />
-            <End Role="tripData" EntitySet="tripDatas" />
-          </AssociationSet>
           <AssociationSet Name="FK__trips__userID__38996AB5" Association="Self.FK__trips__userID__38996AB5">
             <End Role="users" EntitySet="users" />
             <End Role="trips" EntitySet="trips" />
@@ -168,7 +131,6 @@
                 <ScalarProperty Name="latitude" ColumnName="latitude" />
                 <ScalarProperty Name="longitude" ColumnName="longitude" />
                 <ScalarProperty Name="speed" ColumnName="speed" />
-                <ScalarProperty Name="recTime" ColumnName="recTime" />
                 <ScalarProperty Name="maxXAcelerometer" ColumnName="maxXAcelerometer" />
                 <ScalarProperty Name="maxYAcelerometer" ColumnName="maxYAcelerometer" />
                 <ScalarProperty Name="maxZAcelerometer" ColumnName="maxZAcelerometer" />
@@ -178,12 +140,12 @@
           <EntitySetMapping Name="trips">
             <EntityTypeMapping TypeName="drivestatsModel.trip">
               <MappingFragment StoreEntitySet="trips">
+                <ScalarProperty Name="score" ColumnName="score" />
+                <ScalarProperty Name="startTime" ColumnName="startTime" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="userID" ColumnName="userID" />
                 <ScalarProperty Name="tripDate" ColumnName="tripDate" />
-                <ScalarProperty Name="startLatitude" ColumnName="startLatitude" />
-                <ScalarProperty Name="startLongitude" ColumnName="startLongitude" />
-              </MappingFragment>
+                </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="users">

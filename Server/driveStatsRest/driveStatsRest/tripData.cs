@@ -18,12 +18,9 @@ namespace driveStatsRest
         public Nullable<int> tripID { get; set; }
         public string latitude { get; set; }
         public string longitude { get; set; }
-        public Nullable<double> speed { get; set; }
-        public string recTime { get; set; }
-        public Nullable<double> maxXAcelerometer { get; set; }
-        public Nullable<double> maxYAcelerometer { get; set; }
-        public Nullable<double> maxZAcelerometer { get; set; }
-    
-        public virtual trip trip { get; set; }
+        public string speed { get; set; }
+        public string maxXAcelerometer { get; set; }
+        public string maxYAcelerometer { get; set; }
+        public string maxZAcelerometer { get; set; }
     }
 }
