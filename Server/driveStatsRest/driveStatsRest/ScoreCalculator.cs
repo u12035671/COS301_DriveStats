@@ -9,7 +9,7 @@ namespace driveStatsRest
     {
         public ScoreCalculator(List<tripData> trips, double interval)
         {
-
+            
         }
 
         public double getscore()
